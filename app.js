@@ -1,9 +1,18 @@
 const express = require('express')
 const app = express()
+const exphbs = require('express-handlebars')
 const port = 3000
 
+
+//express template engine
+//handlebars
+app.engine('handlebars', exphbs.engine({defaultLayout: 'main' }))
+app.set('view engine', 'handlebars')
+
+
+//routes setting
 app.get('/',(req,res)=>{
-    res.send('This is my movie list built with Express')
+    res.render('index')
 })
 
 app.listen(port,()=>{

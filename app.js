@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const exphbs = require("express-handlebars");
-const movieList = require('./movies.json')
+const movieList = require("./movies.json");
 const port = 3000;
 
 //express template engine
@@ -15,6 +15,13 @@ app.use(express.static("public"));
 //routes setting
 app.get("/", (req, res) => {
   res.render("index", { movies: movieList.results });
+});
+
+
+//params
+app.get("/movies/:movie_id", (req, res) => {
+    const movie = movieList.results.filter(movie=> movie.id == req.params.movie_id)
+  res.render('show', { movie: movie[0] })
 });
 
 //listen express server
